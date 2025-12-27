@@ -18,7 +18,7 @@ export async function collectEngineeringSignals(url) {
     );
 
     if (githubLink) {
-      const match = githubLink.match(/github\.com\/([^\/]+\/[^\/]+)/);
+      const match = githubLink.match(/github\.com\/([^/]+\/[^/]+)/);
       if (match) {
         repoPath = match[1].replace(/\.git$/, '');
       }

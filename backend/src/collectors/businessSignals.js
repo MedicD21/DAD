@@ -45,7 +45,7 @@ export async function collectBusinessSignals(url) {
     };
 
     signals.social = {
-      platforms: Object.entries(socialPlatforms).filter(([k, v]) => v).map(([k]) => k),
+      platforms: Object.entries(socialPlatforms).filter(([_k, v]) => v).map(([k]) => k),
       count: Object.values(socialPlatforms).filter(v => v).length
     };
 
