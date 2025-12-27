@@ -9,7 +9,7 @@ export async function collectAllSignals(url) {
   const [websiteSignals, engineeringSignals, businessSignals] = await Promise.allSettled([
     collectWebsiteSignals(url),
     collectEngineeringSignals(url),
-    collectBusinessSignals(url)
+    collectBusinessSignals(url),
   ]);
 
   const duration = Date.now() - startTime;
@@ -18,6 +18,6 @@ export async function collectAllSignals(url) {
   return {
     website: websiteSignals.status === 'fulfilled' ? websiteSignals.value : {},
     engineering: engineeringSignals.status === 'fulfilled' ? engineeringSignals.value : {},
-    business: businessSignals.status === 'fulfilled' ? businessSignals.value : {}
+    business: businessSignals.status === 'fulfilled' ? businessSignals.value : {},
   };
 }
