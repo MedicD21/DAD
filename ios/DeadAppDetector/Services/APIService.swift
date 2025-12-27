@@ -10,7 +10,7 @@ class APIService {
         #if DEBUG
         return "http://localhost:3000/api/v1"
         #else
-        return "https://your-production-url.com/api/v1"
+        return "https://dad-f3bf.onrender.com/api/v1"
         #endif
     }()
 
