@@ -31,10 +31,12 @@ class AnalysisViewModel: ObservableObject {
             currentResult = result
             historyService.saveResult(result)
             loadHistory()
+            HapticFeedback.success.trigger()
         } catch {
             self.error = error.localizedDescription
+            HapticFeedback.error.trigger()
         }
-        
+
         isLoading = false
     }
     
@@ -99,12 +101,6 @@ class AnalysisViewModel: ObservableObject {
     }
     
     private func formatDate(_ isoDate: String) -> String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: isoDate) else { return isoDate }
-        
-        let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .medium
-        displayFormatter.timeStyle = .short
-        return displayFormatter.string(from: date)
+        return isoDate.formatISO8601Date(style: .medium)
     }
 }
