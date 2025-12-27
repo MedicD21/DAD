@@ -1,0 +1,83 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.npm
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+.nyc_output
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# iOS / Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworkspacedata
+!*.xcworkspace/xcshareddata/
+xcuserdata/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.ipa
+*.dSYM.zip
+*.dSYM
+DerivedData/
+.build/
+Pods/
+*.hmap
+*.ipa
+*.swiftmodule
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Archive
+*.zip
+*.tar.gz
+
+# Cache
+.cache/
+
+# Test
+.test/
+
+# Temporary files
+tmp/
+temp/
