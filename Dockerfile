@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY backend/package*.json ./
 RUN npm ci --only=production
 
 # Production stage
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Add non-root user
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
