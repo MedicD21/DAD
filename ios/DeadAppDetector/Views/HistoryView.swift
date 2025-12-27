@@ -17,6 +17,7 @@ struct HistoryView: View {
                         HistoryRow(result: result)
                             .contentShape(Rectangle())
                             .onTapGesture {
+                                HapticFeedback.selection.trigger()
                                 viewModel.currentResult = result
                                 dismiss()
                             }
@@ -33,6 +34,7 @@ struct HistoryView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Done") {
+                        HapticFeedback.light.trigger()
                         dismiss()
                     }
                 }
@@ -40,6 +42,7 @@ struct HistoryView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if !viewModel.history.isEmpty {
                         Button("Clear") {
+                            HapticFeedback.warning.trigger()
                             viewModel.clearHistory()
                         }
                         .foregroundColor(Theme.danger)
@@ -99,12 +102,6 @@ struct HistoryRow: View {
     }
     
     private func formatDate(_ isoDate: String) -> String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: isoDate) else { return isoDate }
-        
-        let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .short
-        displayFormatter.timeStyle = .short
-        return displayFormatter.string(from: date)
+        return isoDate.formatISO8601Date(style: .short)
     }
 }

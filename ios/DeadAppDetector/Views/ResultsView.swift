@@ -96,6 +96,7 @@ struct ResultsView: View {
     private var actionButtons: some View {
         VStack(spacing: Theme.paddingMedium) {
             Button(action: {
+                HapticFeedback.medium.trigger()
                 Task {
                     await viewModel.recheckApp()
                 }
@@ -104,55 +105,44 @@ struct ResultsView: View {
                     Image(systemName: "arrow.clockwise")
                     Text("Recheck App")
                 }
-                .font(Theme.bodyFont)
-                .foregroundColor(Theme.primary)
-                .frame(maxWidth: .infinity)
-                .padding(Theme.paddingMedium)
-                .background(Theme.cardBackground)
-                .cornerRadius(Theme.cornerRadius)
-                .overlay(
-                    RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                        .stroke(Theme.primary, lineWidth: 2)
-                )
+                .secondaryButtonStyle()
             }
+            .accessibilityLabel("Recheck app")
+            .accessibilityHint("Perform a new analysis of this app")
             
             Button(action: {
+                HapticFeedback.light.trigger()
                 showingShareSheet = true
             }) {
                 HStack {
                     Image(systemName: "square.and.arrow.up")
                     Text("Share Report")
                 }
-                .font(Theme.bodyFont)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(Theme.paddingMedium)
-                .background(Theme.primary)
-                .cornerRadius(Theme.cornerRadius)
+                .primaryButtonStyle()
             }
+            .accessibilityLabel("Share report")
+            .accessibilityHint("Share this analysis report")
             .sheet(isPresented: $showingShareSheet) {
                 ActivityViewController(activityItems: [viewModel.shareReport()])
             }
             
             Button(action: {
-                viewModel.reset()
+                HapticFeedback.selection.trigger()
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                    viewModel.reset()
+                }
             }) {
                 Text("Analyze Another App")
                     .font(Theme.captionFont)
                     .foregroundColor(Theme.secondary)
             }
             .padding(.top, Theme.paddingSmall)
+            .accessibilityLabel("Analyze another app")
         }
     }
     
     private func formatDate(_ isoDate: String) -> String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: isoDate) else { return isoDate }
-        
-        let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .medium
-        displayFormatter.timeStyle = .short
-        return displayFormatter.string(from: date)
+        return isoDate.formatISO8601Date(style: .medium)
     }
 }
 
