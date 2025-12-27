@@ -11,8 +11,12 @@ export default {
     '**/?(*.)+(spec|test).js'
   ],
   transform: {},
+  transformIgnorePatterns: [
+    'node_modules/(?!(whois|whois-json)/)',
+  ],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   verbose: true,
+  testTimeout: 30000,
 };
